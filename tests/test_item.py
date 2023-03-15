@@ -2,18 +2,22 @@
 import pytest
 from src.item import Item
 
+
 @pytest.fixture
 def item3():
     return Item("Холодильник", 30000, 30)
+
 
 @pytest.fixture
 def item4():
     return Item("Пылесос", 5_000, 9)
 
+
 def test_calculate_total_price(item3, item4):
     """Рассчитывает общую стоимость конкретного товара в магазине. Возвращает общую стоимость товара"""
     assert item3.calculate_total_price() == 900_000
     assert item4.calculate_total_price() == 45_000
+
 
 def test_apply_discount(item3, item4):
     """Применяет установленную скидку для конкретного товара"""
@@ -25,6 +29,13 @@ def test_apply_discount(item3, item4):
     item4.apply_discount()
     assert item4.price == 4_000
 
-def test__init__(item3):
 
+def test__init__(item3):
+    """Проверяет соответствие имени конкретного экземпляра"""
     item3.name == "Холодильник"
+
+
+def test_string_to_number():
+    """Статический метод, возвращающий число из числа-строки"""
+    assert Item.string_to_number("9") == 9
+    assert Item.string_to_number("1.5") == 1
