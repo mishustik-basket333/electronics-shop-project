@@ -56,7 +56,7 @@ class Item:
                 if raw[0] == "name":
                     continue
                 else:
-                    Item(raw[0], float(raw[1]), int(raw[1]))
+                    Item(raw[0], float(raw[1]), int(raw[2]))
 
     @staticmethod
     def string_to_number(number_in_str):
