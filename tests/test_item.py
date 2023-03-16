@@ -39,3 +39,9 @@ def test_string_to_number():
     """Статический метод, возвращающий число из числа-строки"""
     assert Item.string_to_number("9") == 9
     assert Item.string_to_number("1.5") == 1
+
+def test_repr(item4):
+    assert repr(item4) == "Item('Пылесос', 5000, 9)"
+
+def test_str(item3):
+    assert str(item3) == "Холодильник"
