@@ -20,15 +20,3 @@ if __name__ == '__main__':
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
-
-
-    @classmethod
-    def instantiate_from_csv(cls):
-        """Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_"""
-        with open('items.csv', "r", encoding='windows-1251') as csv_file:
-            data = csv.reader(csv_file)
-            for raw in data:
-                if raw[0] == "name":
-                    continue
-                else:
-                    Item(raw[0], float(raw[1]), int(raw[1]))
