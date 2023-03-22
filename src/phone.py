@@ -22,4 +22,4 @@ class Phone(Item):
         if number_of_sim > 0 and isinstance(number_of_sim, int):  # type(number_of_sim) == type(123):
             self.__number_of_sim = number_of_sim
         else:
-            raise "Количество физических SIM-карт должно быть целым числом больше нуля."
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
