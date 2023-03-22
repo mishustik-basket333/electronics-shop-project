@@ -32,7 +32,7 @@ def test_apply_discount(item3, item4):
 
 def test__init__(item3):
     """Проверяет соответствие имени конкретного экземпляра"""
-    item3.name == "Холодильник"
+    assert item3.name == "Холодильник"
 
 
 def test_string_to_number():
@@ -40,8 +40,14 @@ def test_string_to_number():
     assert Item.string_to_number("9") == 9
     assert Item.string_to_number("1.5") == 1
 
+
 def test_repr(item4):
     assert repr(item4) == "Item('Пылесос', 5000, 9)"
 
+
 def test_str(item3):
     assert str(item3) == "Холодильник"
+
+
+def test_add_item(item3, item4):
+    assert item4 + item3 == 39

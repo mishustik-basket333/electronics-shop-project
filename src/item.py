@@ -69,3 +69,10 @@ class Item:
 
     def __str__(self):
         return f"{self.__name}"
+
+    def __add__(self, other):
+        """"""
+        if not isinstance(other, Item):
+            raise "Складывать можно только объекты Item и дочерние от них."
+        data = int(self.quantity + other.quantity)
+        return data
