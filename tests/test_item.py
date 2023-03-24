@@ -51,3 +51,10 @@ def test_str(item3):
 
 def test_add_item(item3, item4):
     assert item4 + item3 == 39
+
+
+def test_name_setter(item3):
+    item3.name = "Коротко"
+    assert item3.name == "Коротко"
+    item3.name = "Длинное_название"
+    assert item3.name == "Коротко"
