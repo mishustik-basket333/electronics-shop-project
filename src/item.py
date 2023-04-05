@@ -51,13 +51,24 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_"""
-        with open('items.csv', "r", encoding='windows-1251') as csv_file:
-            data = csv.reader(csv_file)
-            for raw in data:
-                if raw[0] == "name":
-                    continue
-                else:
-                    Item(raw[0], float(raw[1]), int(raw[2]))
+        try:
+            with open('items.csv', "r", encoding='windows-1251') as csv_file:
+                data = csv.reader(csv_file)
+                for raw in data:
+                    try:
+                        InstantiateCSVError(raw)
+                    except InstantiateCSVErrorPost as e:
+                        print(e)
+                        raise InstantiateCSVErrorPost("Файл item.csv поврежден")
+                    break
+
+                for raw in data:
+                    if raw[0] == "name":
+                        continue
+                    else:
+                        Item(raw[0], float(raw[1]), int(raw[2]))
+        except FileNotFoundError:
+            raise FileNotFoundError("_Отсутствует файл item.csv_")
 
     @staticmethod
     def string_to_number(number_in_str):
@@ -77,3 +88,26 @@ class Item:
             raise "Складывать можно только объекты Item и дочерние от них."
         data = int(self.quantity + other.quantity)
         return data
+
+
+# class InstantiateCSVError(Exception):
+#     """Общий класс"""
+
+
+class InstantiateCSVErrorPost(Exception):
+    """Нет одной из колонок в данных"""
+    def __init__(self, *args):
+        self.msg = args[0] if args else None
+
+    def __str__(self):
+        return self.msg
+
+
+class InstantiateCSVError:
+    """Класс для работы с данными"""
+
+    def __init__(self, data):
+        if len(data) != 3:
+            raise InstantiateCSVErrorPost("Неправильное количество столбцов")
+        else:
+            self.data = data
